@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Retirement Calculator</h1>
+    </header>
+
+    <main>
+        <form id="retirement-form">
+            <label for="current-age">Current Age:</label>
+            <input type="number" id="current-age" required>
+
+            <label for="retirement-age">Retirement Age:</label>
+            <input type="number" id="retirement-age" required>
+
+            <label for="return-rate">Annual Return Rate (%):</label>
+            <input type="number" id="return-rate" required>
+
+            <label for="nest-egg">Starting Nest Egg:</label>
+            <input type="number" id="nest-egg" required>
+
+            <label for="annual-investments">Additional Annual Investments:</label>
+            <input type="number" id="annual-investments" required>
+
+<!-- ... (previous code remains the same) ... -->
+
+            <label for="withdrawal-type">Withdrawal Type:</label>
+            <select id="withdrawal-type">
+                <option value="amount">Absolute Amount</option>
+                <option value="percentage">Percentage of Nest Egg</option>
+            </select>
+
+            <label for="withdrawal-amount">Withdrawal Amount:</label>
+            <input type="number" id="withdrawal-amount" required>
+
+            <label for="withdrawal-increase-type">Withdrawal Increase Type:</label>
+            <select id="withdrawal-increase-type">
+                <option value="none">None</option>
+                <option value="inflation">Inflation</option>
+                <option value="fixed">Fixed Percentage</option>
+            </select>
+
+            <label for="withdrawal-increase-rate">Withdrawal Increase Rate (%):</label>
+            <input type="number" id="withdrawal-increase-rate" value="0" required>
+
+<!-- ... (remaining code stays the same) ... -->
+
+            <label for="life-expectancy">Life Expectancy:</label>
+            <input type="number" id="life-expectancy" required>
+
+            <label for="inflation-rate">Inflation Rate (%):</label>
+            <input type="number" id="inflation-rate" required>
+
+            <button type="submit">Calculate</button>
+        </form>
+
+        <section id="results">
+            <h2>Results</h2>
+            <table id="results-table">
+                <!-- Results table will be populated here -->
+            </table>
+
+            <div id="chart-container">
+                <!-- Charts will be rendered here -->
+            </div>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
