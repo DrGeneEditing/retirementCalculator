@@ -3,74 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retirement Calculator</title>
+    <title>Retirement Planner</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Retirement Calculator</h1>
+        <h1>Retirement Planner</h1>
     </header>
 
     <main>
-        <form id="retirement-form">
-            <label for="current-age">Current Age:</label>
-            <input type="number" id="current-age" required>
+        <section id="introduction">
+            <h2>How to Use This Tool</h2>
+            <p>This investment calculator tool helps you model your savings and withdrawals throughout your retirement years. Follow these steps:</p>
+            <ol>
+                <li>Fill in your assumptions in the form below.</li>
+                <li>Hover over each field for more information about what to enter.</li>
+                <li>Click "Calculate" to see your projected retirement savings and withdrawal plan.</li>
+                <li>Review the results, including charts and detailed breakdowns.</li>
+            </ol>
+            <p>Remember, this is a planning tool and should not be considered as financial advice. Always consult with a qualified financial advisor for personalized recommendations.</p>
+        </section>
 
-            <label for="retirement-age">Retirement Age:</label>
-            <input type="number" id="retirement-age" required>
+        <section id="input-section">
+            <h2>Your Assumptions</h2>
+            <form id="retirement-form">
+                <div class="form-group">
+                    <label for="current-age" data-tooltip="Your current age in years">Current Age:</label>
+                    <input type="number" id="current-age" required min="0" max="120">
+                </div>
 
-            <label for="return-rate">Annual Return Rate (%):</label>
-            <input type="number" id="return-rate" required>
+                <div class="form-group">
+                    <label for="retirement-age" data-tooltip="The age at which you plan to retire">Retirement Age:</label>
+                    <input type="number" id="retirement-age" required min="0" max="120">
+                </div>
 
-            <label for="nest-egg">Starting Nest Egg:</label>
-            <input type="number" id="nest-egg" required>
+                <div class="form-group">
+                    <label for="life-expectancy" data-tooltip="Your expected age at end of life">Life Expectancy:</label>
+                    <input type="number" id="life-expectancy" required min="0" max="120">
+                </div>
 
-            <label for="annual-investments">Additional Annual Investments:</label>
-            <input type="number" id="annual-investments" required>
+                <div class="form-group">
+                    <label for="return-rate" data-tooltip="Expected annual return on investments (%)">Expected Annual Return Rate (%):</label>
+                    <input type="number" id="return-rate" required min="0" max="100" step="0.1">
+                </div>
 
-<!-- ... (previous code remains the same) ... -->
+                <div class="form-group">
+                    <label for="inflation-rate" data-tooltip="Expected annual inflation rate (%)">Expected Inflation Rate (%):</label>
+                    <input type="number" id="inflation-rate" required min="0" max="100" step="0.1">
+                </div>
 
-            <label for="withdrawal-type">Withdrawal Type:</label>
-            <select id="withdrawal-type">
-                <option value="amount">Absolute Amount</option>
-                <option value="percentage">Percentage of Nest Egg</option>
-            </select>
+                <div class="form-group">
+                    <label for="initial-investment" data-tooltip="Current retirement savings">Initial Investment ($):</label>
+                    <input type="text" id="initial-investment" required>
+                </div>
 
-            <label for="withdrawal-amount">Withdrawal Amount:</label>
-            <input type="number" id="withdrawal-amount" required>
+                <div class="form-group">
+                    <label for="contribution-amount" data-tooltip="Amount you plan to contribute regularly">Regular Contribution Amount ($):</label>
+                    <input type="text" id="contribution-amount" required>
+                </div>
 
-            <label for="withdrawal-increase-type">Withdrawal Increase Type:</label>
-            <select id="withdrawal-increase-type">
-                <option value="none">None</option>
-                <option value="inflation">Inflation</option>
-                <option value="fixed">Fixed Percentage</option>
-            </select>
+                <div class="form-group">
+                    <label for="contribution-interval" data-tooltip="How often you make contributions">Contribution Interval:</label>
+                    <select id="contribution-interval" required>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="annually">Annually</option>
+                    </select>
+                </div>
 
-            <label for="withdrawal-increase-rate">Withdrawal Increase Rate (%):</label>
-            <input type="number" id="withdrawal-increase-rate" value="0" required>
+                <div class="form-group">
+                    <label for="withdrawal-amount" data-tooltip="Amount you plan to withdraw annually in retirement">Expected Annual Withdrawals in Retirement ($):</label>
+                    <input type="text" id="withdrawal-amount" required>
+                </div>
 
-<!-- ... (remaining code stays the same) ... -->
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="inflation-adjusted-withdrawal">
+                    <label for="inflation-adjusted-withdrawal" data-tooltip="Increase withdrawals with inflation each year">Adjust withdrawals for inflation</label>
+                </div>
 
-            <label for="life-expectancy">Life Expectancy:</label>
-            <input type="number" id="life-expectancy" required>
+                <div class="form-group">
+                    <label for="investment-strategy" data-tooltip="Choose a scenario to model different outcomes">Model Different Outcomes:</label>
+                    <select id="investment-strategy" required>
+                        <option value="balanced">Base Case</option>
+                        <option value="Worst Case">Worst Case</option>
+                        <option value="Best Case">Best Case</option>
+                    </select>
+                </div>
 
-            <label for="inflation-rate">Inflation Rate (%):</label>
-            <input type="number" id="inflation-rate" required>
+                <button type="submit">Calculate</button>
+            </form>
+        </section>
 
-            <button type="submit">Calculate</button>
-        </form>
-
-        <section id="results">
-            <h2>Results</h2>
-            <table id="results-table">
-                <!-- Results table will be populated here -->
-            </table>
+        <section id="results-section" class="hidden">
+            <h2>Results Summary</h2>
+            <div id="summary" class="summary-grid">
+                <div class="summary-column">
+                    <h3>Nominal Values</h3>
+                    <p>Total savings at retirement: <span id="total-savings"></span></p>
+                    <p>Total savings at end of life: <span id="total-savings-end"></span></p>
+                </div>
+                <div class="summary-column">
+                    <h3>Inflation-Adjusted Values</h3>
+                    <p>Adjusted value at retirement: <span id="adjusted-savings"></span></p>
+                    <p>Adjusted value at end of life: <span id="adjusted-savings-end"></span></p>
+                </div>
+            </div>
 
             <div id="chart-container">
-                <!-- Charts will be rendered here -->
+                <h3>Savings Over Time</h3>
+                <canvas id="balance-chart"></canvas>
+            </div>
+
+            <div id="withdrawal-chart-container">
+                <h3>Withdrawals Over Time</h3>
+                <canvas id="withdrawal-chart"></canvas>
+            </div>
+
+            <div id="table-container">
+                <h3>Detailed Results</h3>
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Age</th>
+                            <th>Annual Contribution</th>
+                            <th>Withdrawal</th>
+                            <th>Account Balance</th>
+                            <th>Inflation-Adjusted Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </section>
     </main>
+
+    <footer>
+        <p>Disclaimer: This tool is for informational purposes only and should not be considered financial advice. Always consult with a qualified financial advisor for personalized recommendations.</p>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
