@@ -244,11 +244,69 @@ function initRetirementPlanner() {
     }
 }
 
-// Initialize the planner when the DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initRetirementPlanner);
-} else {
+
+// Dark mode toggle functionality
+
+// ... (previous code remains the same)
+
+// Dark mode toggle functionality
+function initDarkModeToggle() {
+    const toggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+
+    if (!toggle) {
+        console.error('Dark mode toggle button not found');
+        return;
+    }
+
+    // Check for saved theme preference or default to light mode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        updateToggleButton(true);
+    }
+
+    toggle.addEventListener('click', () => {
+        console.log('Dark mode toggle clicked');
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        console.log('Dark mode:', isDarkMode);
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        updateToggleButton(isDarkMode);
+    });
+}
+
+function updateToggleButton(isDarkMode) {
+    const toggle = document.getElementById('dark-mode-toggle');
+    toggle.textContent = isDarkMode ? '☀️' : '🌓';
+    toggle.setAttribute('aria-label', `Toggle ${isDarkMode ? 'light' : 'dark'} mode`);
+}
+
+// Initialize the planner and dark mode toggle when the DOM is ready
+let isInitialized = false;
+
+function initApp() {
+    if (isInitialized) return;
+    isInitialized = true;
+
     initRetirementPlanner();
+    initDarkModeToggle();
+}
+
+// Use a single event listener for DOMContentLoaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
+
+// ... (rest of the code remains the same)
+
+// Initialize the app when the DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
 }
 
 // Expose functions for testing
