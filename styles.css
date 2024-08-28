@@ -1,12 +1,50 @@
 /* Global Styles */
+:root {
+    --bg-color: #f0f8ff;
+    --text-color: #333;
+    --header-color: #4a86e8;
+    --subheader-color: #3a76d8;
+    --form-bg: #fff;
+    --form-border: #ddd;
+    --button-bg: #4a86e8;
+    --button-text: #fff;
+    --summary-bg: #f0f8ff;
+    --summary-column-bg: #c1eaf3;
+    --table-bg: #fff;
+    --table-border: #e6f2ff;
+    --table-header-bg: #4a86e8;
+    --table-header-text: #fff;
+    --table-row-even: #f0f8ff;
+    --table-row-hover: #e6f2ff;
+}
+
+body.dark-mode {
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --header-color: #6fa8ff;
+    --subheader-color: #5a96ff;
+    --form-bg: #2a2a2a;
+    --form-border: #444;
+    --button-bg: #6fa8ff;
+    --button-text: #1a1a1a;
+    --summary-bg: #2a2a2a;
+    --summary-column-bg: #3a3a3a;
+    --table-bg: #2a2a2a;
+    --table-border: #444;
+    --table-header-bg: #6fa8ff;
+    --table-header-text: #1a1a1a;
+    --table-row-even: #333;
+    --table-row-hover: #444;
+}
+
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-color);
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f0f8ff;
+    background-color: var(--bg-color);
 }
 
 header {
@@ -15,21 +53,21 @@ header {
 }
 
 h1 {
-    color: #4a86e8;
+    color: var(--header-color);
 }
 
 h2 {
-    color: #3a76d8;
+    color: var(--subheader-color);
     margin-top: 30px;
 }
 
 h3 {
-    color: #2a66c8;
+    color: var(--subheader-color);
 }
 
 /* Introduction Section */
 #introduction {
-    background-color: #e6f2ff;
+    background-color: var(--summary-bg);
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 30px;
@@ -48,7 +86,7 @@ h3 {
 
 label {
     margin-bottom: 5px;
-    color: #666;
+    color: var(--text-color);
     cursor: help;
 }
 
@@ -57,10 +95,12 @@ input[type="text"],
 select {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--form-border);
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 16px;
+    background-color: var(--form-bg);
+    color: var(--text-color);
 }
 
 /* Set a fixed width for inputs and selects */
@@ -73,8 +113,8 @@ button {
     display: block;
     width: 300px;
     padding: 10px;
-    background-color: #4a86e8;
-    color: white;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -83,7 +123,7 @@ button {
 }
 
 button:hover {
-    background-color: #3a76d8;
+    filter: brightness(90%);
 }
 
 /* Checkbox Styles */
@@ -118,21 +158,21 @@ button:hover {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-    background-color: #f0f8ff;
+    background-color: var(--summary-bg);
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
 .summary-column {
-    background-color: #c1eaf3;
+    background-color: var(--summary-column-bg);
     padding: 15px;
     border-radius: 6px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .summary-column h3 {
-    color: #4a86e8;
+    color: var(--header-color);
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 1.2em;
@@ -153,7 +193,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background-color: #fff;
+    background-color: var(--table-bg);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
@@ -161,22 +201,22 @@ table {
 
 th, td {
     padding: 12px;
-    border: 1px solid #e6f2ff;
+    border: 1px solid var(--table-border);
     text-align: left;
 }
 
 th {
-    background-color: #4a86e8;
-    color: #fff;
+    background-color: var(--table-header-bg);
+    color: var(--table-header-text);
     font-weight: bold;
 }
 
 tr:nth-child(even) {
-    background-color: #f0f8ff;
+    background-color: var(--table-row-even);
 }
 
 tr:hover {
-    background-color: #e6f2ff;
+    background-color: var(--table-row-hover);
 }
 
 /* Footer Styles */
@@ -184,7 +224,7 @@ footer {
     margin-top: 30px;
     text-align: center;
     font-size: 0.8em;
-    color: #666;
+    color: var(--text-color);
 }
 
 /* Tooltip Styles */
@@ -197,8 +237,8 @@ label[data-tooltip]::after {
     position: absolute;
     bottom: 100%;
     left: 0;
-    background-color: #5c83fb;
-    color: #ffffff;
+    background-color: var(--button-bg);
+    color: var(--button-text);
     padding: 5px 10px;
     border-radius: 4px;
     font-size: 14px;
@@ -212,6 +252,29 @@ label[data-tooltip]::after {
 label[data-tooltip]:hover::after {
     opacity: 1;
     visibility: visible;
+}
+
+/* Dark Mode Toggle */
+#dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+#dark-mode-toggle:hover {
+    filter: brightness(90%);
 }
 
 /* Responsive Design */
@@ -236,5 +299,13 @@ label[data-tooltip]:hover::after {
 
     th, td {
         padding: 8px;
+    }
+
+    #dark-mode-toggle {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
     }
 }
